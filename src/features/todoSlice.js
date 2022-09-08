@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const todoSlice = createSlice({
-  name: 'todos',
+  name: 'todos', // not relevant this name
   initialState: [
     { id: 1, title: 'todo1', completed: false },
     { id: 2, title: 'todo2', completed: false },
@@ -15,10 +15,14 @@ const todoSlice = createSlice({
         completed: false
       };
       state.push(newTodo);
+    },
+    toggleComplete: (state, action) => {
+      const index = state.findIndex((todo) => todo.id === action.payload.id);
+      state[index].completed = action.payload.completed;
     }
   }
 });
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, toggleComplete } = todoSlice.actions;
 
 export default todoSlice.reducer;
